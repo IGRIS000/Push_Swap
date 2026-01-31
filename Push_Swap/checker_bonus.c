@@ -28,6 +28,7 @@ static void	ft_bonus_free(t_node **a, t_node **b, char *s)
 	ft_free(b);
 	free(s);
 	write(2, "Error\n", 6);
+	get_next_line(1, 1);
 	exit(1);
 }
 
@@ -74,12 +75,12 @@ int	main(int argc, char **argv)
 	while (argv[++i])
 		if (!stack_parse(&a, argv[i]))
 			return (ft_free(&a), write(2, "Error\n", 6), 1);
-	line = get_next_line(0);
+	line = get_next_line(0, 0);
 	while (line)
 	{
 		ft_exec(&a, &b, line);
 		free(line);
-		line = get_next_line(0);
+		line = get_next_line(0, 0);
 	}
 	if (!ft_check(a) && !b)
 		write(1, "OK\n", 3);

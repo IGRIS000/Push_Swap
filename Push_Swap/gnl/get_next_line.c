@@ -93,11 +93,13 @@ char	*ft_get_line(char *stash)
 	return (line);
 }
 
-char	*get_next_line(int fd)
+char	*get_next_line(int fd, int err)
 {
 	static char	*stash;
 	char		*line;
 
+	if (err == 1)
+		return (free(stash), NULL);
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!stash || !gnl_strchr(stash, '\n'))
